@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação Postural por Fotos | IA Analisa a Tua Postura — Personal Trainer Lucas Lima</title>
+<meta name="description" content="Avaliação postural automática por fotos. A IA deteta os pontos do teu corpo e analisa desalinhamentos de ombros, anca, cabeça e coluna em segundos. Personal Trainer Lucas Lima.">
+<meta name="theme-color" content="#0a0014">
+
+<!-- Open Graph / Social share -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Avaliação Postural por Fotos — Análise com IA">
+<meta property="og:description" content="Faz upload de uma foto de frente e de perfil e descobre os teus desalinhamentos posturais em segundos. 100% no teu telemóvel.">
+<meta property="og:image" content="https://lucaslimaef.github.io/teste-hernia-disco/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon SVG inline -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%8D%3C/text%3E%3C/svg%3E">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '264800457918824');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {content_name: 'Avaliacao Postural - Fotos'});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08000f;
+    --bg-2: #11001f;
+    --surface: #1a0033;
+    --card: #220040;
+    --card-hover: #2a004f;
+    --border: rgba(168, 85, 247, 0.2);
+    --border-strong: rgba(168, 85, 247, 0.5);
+    --primary: #a855f7;
+    --primary-light: #c084fc;
+    --neon: #d946ef;
+    --neon-glow: rgba(217, 70, 239, 0.55);
+    --purple-glow: rgba(168, 85, 247, 0.45);
+    --danger: #ff4d6d;
+    --warn: #ffb547;
+    --success: #4ade80;
+    --text: #f5f0ff;
+    --muted: #a99cc7;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background:
+      radial-gradient(ellipse at top, rgba(168, 85, 247, 0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, rgba(217, 70, 239, 0.12) 0%, transparent 50%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* TOP BRAND BAR */
+  .brand-bar {
+    background: rgba(10, 0, 20, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.85rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    text-align: center;
+  }
+  .brand-bar a {
+    color: var(--primary-light);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .brand-bar a:hover { color: var(--neon); text-shadow: 0 0 12px var(--neon-glow); }
+  .brand-bar .dot { color: var(--neon); margin: 0 0.7rem; text-shadow: 0 0 8px var(--neon-glow); }
+
+  .main-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* HEADER */
+  header { text-align: center; margin-bottom: 2.5rem; padding: 2rem 0 1rem; }
+  .badge-pill {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: rgba(168, 85, 247, 0.12);
+    color: var(--primary-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 24px var(--purple-glow);
+  }
+  .icon-spine {
+    font-size: 4rem; margin-bottom: 1rem; display: inline-block;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px var(--neon-glow));
+  }
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.2rem, 7vw, 4rem);
+    font-weight: 400; margin: 0.5rem 0; line-height: 1; text-transform: uppercase;
+    background: linear-gradient(135deg, #ffffff 0%, var(--primary-light) 50%, var(--neon) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    text-shadow: 0 0 40px var(--purple-glow);
+  }
+  .subtitle {
+    color: var(--muted); font-size: 1.05rem; margin: 1.25rem auto 0;
+    font-weight: 400; max-width: 640px;
+  }
+  .subtitle strong { color: var(--text); }
+
+  /* ALERT */
+  .alert-banner {
+    background: linear-gradient(135deg, rgba(255, 77, 109, 0.08), rgba(255, 181, 71, 0.06));
+    border: 1px solid rgba(255, 77, 109, 0.3);
+    border-left: 4px solid var(--danger);
+    border-radius: 12px; padding: 1.1rem 1.4rem; margin: 2rem 0;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .alert-text { font-size: 0.92rem; line-height: 1.55; color: var(--text); }
+  .alert-text strong { color: var(--danger); }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-family: 'Anton', sans-serif; text-transform: uppercase;
+    font-size: 1.5rem; letter-spacing: 0.5px; margin: 2.5rem 0 0.4rem; color: var(--text);
+  }
+  .section-sub { color: var(--muted); font-size: 0.92rem; margin-bottom: 1.4rem; }
+
+  /* HOW-TO STEPS */
+  .howto {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.9rem; margin-bottom: 1rem;
+  }
+  .howto-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.1rem; font-size: 0.86rem; color: var(--muted);
+  }
+  .howto-item b { color: var(--text); display: block; margin-bottom: 0.2rem; font-size: 0.95rem; }
+  .howto-emoji { font-size: 1.6rem; display: block; margin-bottom: 0.5rem; }
+
+  /* UPLOAD GRID */
+  .upload-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem; margin-bottom: 2rem;
+  }
+  .upload-card {
+    background: var(--card); border: 2px dashed var(--border-strong);
+    border-radius: 16px; padding: 1.5rem; text-align: center;
+    transition: all 0.25s ease; position: relative; overflow: hidden;
+  }
+  .upload-card.has-image { border-style: solid; border-color: var(--primary); }
+  .upload-card:hover { border-color: var(--neon); background: var(--card-hover); }
+  .upload-card h3 {
+    font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: 0.5px;
+    font-size: 1.25rem; margin: 0 0 0.2rem;
+  }
+  .upload-card .uc-sub { color: var(--primary-light); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 1rem; }
+  .upload-dropzone {
+    cursor: pointer; padding: 1.5rem 0.5rem; border-radius: 12px;
+    background: rgba(168,85,247,0.06); transition: background 0.2s;
+  }
+  .upload-dropzone:hover { background: rgba(168,85,247,0.14); }
+  .upload-dropzone .big { font-size: 2.6rem; display: block; margin-bottom: 0.4rem; }
+  .upload-dropzone .small { color: var(--muted); font-size: 0.85rem; }
+  .preview-wrap { position: relative; display: none; margin-top: 0.5rem; }
+  .preview-wrap.show { display: block; }
+  .preview-wrap canvas { width: 100%; height: auto; border-radius: 12px; display: block; }
+  .preview-wrap .retake {
+    position: absolute; top: 0.6rem; right: 0.6rem;
+    background: rgba(8,0,15,0.8); border: 1px solid var(--border); color: var(--text);
+    border-radius: 999px; padding: 0.35rem 0.8rem; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+  }
+  .preview-wrap .retake:hover { border-color: var(--neon); color: var(--neon); }
+  input[type=file] { display: none; }
+
+  /* ANALYZE BUTTON */
+  .analyze-row { text-align: center; margin: 1rem 0 0.5rem; }
+  .btn-analyze {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: linear-gradient(135deg, var(--primary), var(--neon));
+    border: none; color: #fff; font-family: 'Inter', sans-serif;
+    font-weight: 800; font-size: 1.05rem; letter-spacing: 0.5px;
+    padding: 1rem 2.4rem; border-radius: 999px; cursor: pointer;
+    box-shadow: 0 0 30px var(--purple-glow); transition: all 0.25s;
+    text-transform: uppercase;
+  }
+  .btn-analyze:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 40px var(--neon-glow); }
+  .btn-analyze:disabled { opacity: 0.45; cursor: not-allowed; }
+  .status-line { text-align: center; color: var(--muted); font-size: 0.88rem; margin-top: 0.9rem; min-height: 1.2rem; }
+  .spinner {
+    width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff; border-radius: 50%; display: inline-block;
+    animation: spin 0.7s linear infinite; vertical-align: -3px;
+  }
+
+  /* RESULTS */
+  .results-section { display: none; margin-top: 2.5rem; animation: slideUp 0.6s ease; }
+  .results-section.show { display: block; }
+
+  .score-wrap {
+    background: linear-gradient(135deg, var(--card), var(--bg-2));
+    border: 1px solid var(--border-strong); border-radius: 20px;
+    padding: 2.2rem; text-align: center; box-shadow: 0 0 60px var(--purple-glow); margin-bottom: 2rem;
+  }
+  .score-num { font-family: 'Anton', sans-serif; font-size: clamp(3rem, 12vw, 5rem); line-height: 1; margin: 0.3rem 0; }
+  .score-low { color: var(--danger); text-shadow: 0 0 30px rgba(255,77,109,0.5); }
+  .score-mid { color: var(--warn); text-shadow: 0 0 30px rgba(255,181,71,0.5); }
+  .score-high { color: var(--success); text-shadow: 0 0 30px rgba(74,222,128,0.5); }
+  .score-label { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .score-badge { display: inline-block; padding: 0.5rem 1.4rem; border-radius: 999px; font-weight: 700; margin-top: 0.7rem; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; }
+  .badge-bad { background: rgba(255,77,109,0.18); border: 1px solid var(--danger); color: var(--danger); }
+  .badge-mid { background: rgba(255,181,71,0.18); border: 1px solid var(--warn); color: var(--warn); }
+  .badge-good { background: rgba(74,222,128,0.15); border: 1px solid var(--success); color: var(--success); }
+
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .metric-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.2rem 1.3rem; border-left: 4px solid var(--muted);
+  }
+  .metric-card.ok { border-left-color: var(--success); }
+  .metric-card.mild { border-left-color: var(--warn); }
+  .metric-card.bad { border-left-color: var(--danger); }
+  .metric-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
+  .metric-name { font-weight: 700; font-size: 0.98rem; }
+  .metric-val { font-family: 'Anton', sans-serif; font-size: 1.3rem; }
+  .metric-card.ok .metric-val { color: var(--success); }
+  .metric-card.mild .metric-val { color: var(--warn); }
+  .metric-card.bad .metric-val { color: var(--danger); }
+  .metric-tag { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-top: 0.3rem; }
+  .metric-card.ok .metric-tag { color: var(--success); }
+  .metric-card.mild .metric-tag { color: var(--warn); }
+  .metric-card.bad .metric-tag { color: var(--danger); }
+  .metric-desc { color: var(--muted); font-size: 0.85rem; margin-top: 0.5rem; line-height: 1.5; }
+
+  .annotated-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+  .annotated-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1rem; }
+  .annotated-card h4 { font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: 1rem; margin: 0 0 0.7rem; letter-spacing: 0.5px; text-align: center; color: var(--primary-light); }
+  .annotated-card canvas { width: 100%; height: auto; border-radius: 10px; display: block; }
+
+  /* CTA FINAL */
+  .cta-final {
+    background: linear-gradient(135deg, var(--primary), var(--neon));
+    border-radius: 20px; padding: 2.5rem 2rem; margin-top: 3rem; text-align: center;
+    position: relative; overflow: hidden; box-shadow: 0 0 60px var(--purple-glow);
+  }
+  .cta-final::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15), transparent 50%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1), transparent 50%);
+    pointer-events: none;
+  }
+  .cta-final-content { position: relative; z-index: 1; }
+  .cta-eyebrow { color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; }
+  .cta-final h2 { font-family: 'Anton', sans-serif; color: #fff; font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 400; margin: 0.5rem 0 1rem; text-transform: uppercase; line-height: 1.1; text-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+  .cta-final p { color: rgba(255,255,255,0.95); font-size: 1.05rem; max-width: 560px; margin: 0 auto 1.8rem; line-height: 1.6; }
+  .cta-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.8rem; border-radius: 999px; font-weight: 700; text-decoration: none; transition: all 0.25s; font-size: 0.95rem; }
+  .cta-btn.primary { background: #fff; color: var(--primary); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+  .cta-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+  .cta-btn.secondary { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(10px); }
+  .cta-btn.secondary:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+  /* QUIZ LINK */
+  .cross-link {
+    display: flex; align-items: center; gap: 1rem; justify-content: center;
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 1.1rem 1.4rem; margin-top: 1.5rem; flex-wrap: wrap; text-align: center;
+  }
+  .cross-link a { color: var(--neon); font-weight: 700; text-decoration: none; }
+  .cross-link a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+  footer a { color: var(--primary-light); text-decoration: none; font-weight: 600; }
+  footer a:hover { color: var(--neon); }
+
+  .privacy-note { text-align: center; color: var(--muted); font-size: 0.82rem; margin-top: 1rem; }
+  .privacy-note b { color: var(--success); }
+
+  /* ANIMATIONS */
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 768px) {
+    .main-container { padding: 1.5rem 1rem 3rem; }
+    .cta-final { padding: 1.8rem 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="brand-bar">
+  <a href="https://instagram.com/personaltrainerlucaslima" target="_blank" rel="noopener" onclick="trackBrandClick('instagram_top')">
+    @PERSONALTRAINERLUCASLIMA
+    <span class="dot">•</span>
+    PERSONAL TRAINER LUCAS LIMA
+  </a>
+</div>
+
+<div class="main-container">
+  <header>
+    <span class="badge-pill">Análise com Inteligência Artificial</span>
+    <div class="icon-spine">🧍</div>
+    <h1>Avaliação<br>Postural por Fotos</h1>
+    <p class="subtitle">
+      Faz upload de uma foto <strong>de frente</strong> e/ou <strong>de perfil</strong>. A IA deteta os pontos do teu corpo e analisa <strong>desalinhamentos de ombros, anca, cabeça e coluna</strong> em segundos — tudo no teu telemóvel, sem enviar nada para a internet.
+    </p>
+  </header>
+
+  <div class="alert-banner">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-text">
+      <strong>Atenção:</strong> Esta é uma ferramenta educativa de rastreio. <strong>Não é um diagnóstico médico</strong> nem substitui avaliação presencial por profissional de saúde. Os valores são estimativas a partir da foto e dependem da qualidade e do ângulo da imagem.
+    </div>
+  </div>
+
+  <!-- COMO TIRAR AS FOTOS -->
+  <h2 class="section-title">📸 Como tirar as fotos</h2>
+  <p class="section-sub">Quanto melhor a foto, mais precisa a análise. Segue estas dicas:</p>
+  <div class="howto">
+    <div class="howto-item"><span class="howto-emoji">🧍</span><b>Corpo inteiro</b>Da cabeça aos pés, em pé e relaxado, no centro da imagem.</div>
+    <div class="howto-item"><span class="howto-emoji">👕</span><b>Roupa justa</b>Roupa colada ao corpo. Evita roupa larga que esconde a silhueta.</div>
+    <div class="howto-item"><span class="howto-emoji">🧱</span><b>Fundo neutro</b>Parede lisa, boa luz, telemóvel à altura do umbigo e direito.</div>
+    <div class="howto-item"><span class="howto-emoji">↔️</span><b>2 ângulos</b>Uma de frente e uma de lado (perfil), pés à largura da anca.</div>
+  </div>
+
+  <!-- UPLOAD -->
+  <h2 class="section-title">⬆️ Carrega as tuas fotos</h2>
+  <p class="section-sub">Podes analisar só de frente, só de perfil, ou as duas (recomendado).</p>
+
+  <div class="upload-grid">
+    <!-- FRENTE -->
+    <div class="upload-card" id="card-front">
+      <h3>Vista de Frente</h3>
+      <div class="uc-sub">Ombros • Anca • Cabeça</div>
+      <label class="upload-dropzone" for="file-front" id="drop-front">
+        <span class="big">📷</span>
+        <span class="small">Toca para escolher / tirar foto</span>
+      </label>
+      <input type="file" id="file-front" accept="image/*">
+      <div class="preview-wrap" id="prev-front">
+        <button class="retake" onclick="resetPhoto('front')">↻ Trocar</button>
+        <canvas id="canvas-front"></canvas>
+      </div>
+    </div>
+
+    <!-- PERFIL -->
+    <div class="upload-card" id="card-side">
+      <h3>Vista de Perfil</h3>
+      <div class="uc-sub">Cabeça à frente • Coluna</div>
+      <label class="upload-dropzone" for="file-side" id="drop-side">
+        <span class="big">📷</span>
+        <span class="small">Toca para escolher / tirar foto</span>
+      </label>
+      <input type="file" id="file-side" accept="image/*">
+      <div class="preview-wrap" id="prev-side">
+        <button class="retake" onclick="resetPhoto('side')">↻ Trocar</button>
+        <canvas id="canvas-side"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="analyze-row">
+    <button class="btn-analyze" id="btnAnalyze" disabled onclick="runAnalysis()">
+      <span id="analyzeIcon">🔍</span> Analisar Postura
+    </button>
+    <div class="status-line" id="statusLine"></div>
+  </div>
+
+  <p class="privacy-note">🔒 <b>Privacidade total:</b> as fotos são processadas no teu próprio dispositivo. Nada é enviado nem guardado em servidores.</p>
+
+  <!-- RESULTADOS -->
+  <div class="results-section" id="resultsSection">
+    <div class="score-wrap">
+      <span class="badge-pill">📊 O teu resultado</span>
+      <div class="score-num" id="scoreNum">0</div>
+      <div class="score-label">Índice de alinhamento postural (0–100)</div>
+      <span class="score-badge" id="scoreBadge"></span>
+    </div>
+
+    <h2 class="section-title">🧠 Imagens analisadas</h2>
+    <p class="section-sub">Os pontos e linhas mostram o que a IA detetou. A linha vertical é o teu "fio de prumo" de referência.</p>
+    <div class="annotated-grid" id="annotatedGrid"></div>
+
+    <h2 class="section-title">📐 Métricas detetadas</h2>
+    <p class="section-sub">Cada métrica é comparada com a faixa considerada ideal.</p>
+    <div class="metrics-grid" id="metricsGrid"></div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div class="cta-final">
+    <div class="cta-final-content">
+      <div class="cta-eyebrow">⚡ próximo passo</div>
+      <h2>Postura má<br>não se corrige<br>sozinha.</h2>
+      <p>
+        Desalinhamentos posturais sobrecarregam discos, articulações e músculos — e são uma das causas mais comuns de dor crónica. O que corrige isto é <strong>treino específico de força, mobilidade e consciência postural</strong>, feito à tua medida. Manda-me as tuas fotos e o teu resultado.
+      </p>
+      <div class="cta-buttons">
+        <a href="https://instagram.com/personaltrainerlucaslima" class="cta-btn primary" target="_blank" rel="noopener" onclick="trackCTA('instagram')">
+          📩 Falar comigo no Instagram
+        </a>
+        <a href="https://ptlucaslima.pt" class="cta-btn secondary" target="_blank" rel="noopener" onclick="trackCTA('site')">
+          🌐 Ver o meu site
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cross-link">
+    <span>💡 Tens dor lombar ou ciática?</span>
+    <a href="index.html" onclick="trackCTA('quiz_hernia')">Faz o Teste de Hérnia de Disco →</a>
+  </div>
+
+  <footer>
+    <p>
+      © Personal Trainer Lucas Lima ·
+      <a href="https://instagram.com/personaltrainerlucaslima" target="_blank" rel="noopener">@personaltrainerlucaslima</a> ·
+      <a href="https://ptlucaslima.pt" target="_blank" rel="noopener">ptlucaslima.pt</a>
+    </p>
+    <p style="opacity:0.7; margin-top:0.5rem;">Conteúdo educativo. Não substitui avaliação médica. Análise por IA (MediaPipe Pose).</p>
+  </footer>
+</div>
+
+<script type="module">
+import { PoseLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
+
+// ---------- estado ----------
+const photos = { front: null, side: null }; // { img, canvas, ctx }
+let poseLandmarker = null;
+let modelLoading = null;
+
+// ---------- tracking helpers ----------
+function safeTrack(event, params) { try { if (typeof fbq === 'function') fbq('trackCustom', event, params || {}); } catch(e) {} }
+function safeTrackStandard(event, params) { try { if (typeof fbq === 'function') fbq('track', event, params || {}); } catch(e) {} }
+window.trackCTA = (d) => { safeTrack('CTAClick', { destination: d }); safeTrackStandard('Contact', { content_name: 'Postura CTA - ' + d }); };
+window.trackBrandClick = (l) => safeTrack('BrandClick', { location: l });
+
+// ---------- carregar modelo (lazy) ----------
+async function loadModel(statusEl) {
+  if (poseLandmarker) return poseLandmarker;
+  if (modelLoading) return modelLoading;
+  modelLoading = (async () => {
+    if (statusEl) statusEl.innerHTML = '<span class="spinner"></span> A carregar o modelo de IA…';
+    const vision = await FilesetResolver.forVisionTasks(
+      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm"
+    );
+    poseLandmarker = await PoseLandmarker.createFromOptions(vision, {
+      baseOptions: {
+        modelAssetPath: "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task",
+        delegate: "GPU"
+      },
+      runningMode: "IMAGE",
+      numPoses: 1
+    });
+    return poseLandmarker;
+  })();
+  return modelLoading;
+}
+
+// ---------- upload handling ----------
+function setupUpload(view) {
+  const input = document.getElementById('file-' + view);
+  input.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.getElementById('canvas-' + view);
+        // limitar resolução para performance
+        const maxDim = 720;
+        let w = img.naturalWidth, h = img.naturalHeight;
+        const scale = Math.min(1, maxDim / Math.max(w, h));
+        canvas.width = Math.round(w * scale);
+        canvas.height = Math.round(h * scale);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        photos[view] = { canvas, ctx, w: canvas.width, h: canvas.height };
+        document.getElementById('prev-' + view).classList.add('show');
+        document.getElementById('drop-' + view).style.display = 'none';
+        document.getElementById('card-' + view).classList.add('has-image');
+        updateAnalyzeBtn();
+        safeTrack('PhotoUploaded', { view });
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+window.resetPhoto = (view) => {
+  photos[view] = null;
+  document.getElementById('file-' + view).value = '';
+  document.getElementById('prev-' + view).classList.remove('show');
+  document.getElementById('drop-' + view).style.display = '';
+  document.getElementById('card-' + view).classList.remove('has-image');
+  updateAnalyzeBtn();
+};
+
+function updateAnalyzeBtn() {
+  document.getElementById('btnAnalyze').disabled = !(photos.front || photos.side);
+}
+
+setupUpload('front');
+setupUpload('side');
+
+// ---------- geometria ----------
+const L = { nose:0, eyeL:2, eyeR:5, earL:7, earR:8, shL:11, shR:12, elL:13, elR:14, wrL:15, wrR:16, hipL:23, hipR:24, knL:25, knR:26, akL:27, akR:28 };
+const px = (p, dim) => ({ x: p.x * dim.w, y: p.y * dim.h, v: p.visibility ?? 1 });
+const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+// ângulo (graus) da linha a-b em relação à HORIZONTAL (0 = perfeitamente nivelado)
+function tiltFromHorizontal(a, b) {
+  return Math.abs(Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI) % 180;
+}
+// desvio em relação à horizontal, devolve sempre 0..90
+function levelDeviation(a, b) {
+  let d = tiltFromHorizontal(a, b);
+  if (d > 90) d = 180 - d;
+  return d;
+}
+// ângulo da linha a->b em relação à VERTICAL (0 = perfeitamente vertical)
+function tiltFromVertical(a, b) {
+  const ang = Math.atan2(b.x - a.x, b.y - a.y) * 180 / Math.PI;
+  return Math.abs(ang);
+}
+
+function severity(value, mildT, badT) {
+  if (value < mildT) return 'ok';
+  if (value < badT) return 'mild';
+  return 'bad';
+}
+const tagText = { ok: '✓ Bom alinhamento', mild: '⚠ Desvio ligeiro', bad: '✕ Desvio acentuado' };
+
+// ---------- análise por vista ----------
+function analyzeFront(lm, dim) {
+  const earL = px(lm[L.earL], dim), earR = px(lm[L.earR], dim);
+  const shL = px(lm[L.shL], dim), shR = px(lm[L.shR], dim);
+  const hipL = px(lm[L.hipL], dim), hipR = px(lm[L.hipR], dim);
+
+  const shoulderDev = levelDeviation(shL, shR);
+  const hipDev = levelDeviation(hipL, hipR);
+  const headDev = levelDeviation(earL, earR);
+
+  // desvio lateral da cabeça: nariz vs centro dos ombros, em % da largura dos ombros
+  const nose = px(lm[L.nose], dim);
+  const shMid = mid(shL, shR);
+  const shoulderWidth = Math.abs(shR.x - shL.x) || 1;
+  const headShiftPct = Math.abs(nose.x - shMid.x) / shoulderWidth * 100;
+
+  const metrics = [
+    { name: 'Nivelamento dos ombros', value: shoulderDev, unit: '°', sev: severity(shoulderDev, 2, 5),
+      desc: 'Diferença de altura entre os ombros. Acima de 5° sugere ombro caído / escoliose funcional.' },
+    { name: 'Nivelamento da anca', value: hipDev, unit: '°', sev: severity(hipDev, 2, 5),
+      desc: 'Diferença de altura entre as cristas ilíacas. Desnível pode indicar dismetria ou báscula pélvica.' },
+    { name: 'Inclinação da cabeça', value: headDev, unit: '°', sev: severity(headDev, 2, 4),
+      desc: 'Inclinação lateral da cabeça. Comum em quem usa muito o telemóvel ou dorme de lado.' },
+    { name: 'Desvio lateral da cabeça', value: headShiftPct, unit: '%', sev: severity(headShiftPct, 6, 12),
+      desc: 'Quanto a cabeça está deslocada para um lado em relação ao centro dos ombros.' }
+  ];
+  return { metrics, draw: { type: 'front', shL, shR, hipL, hipR, earL, earR, nose, shMid } };
+}
+
+function analyzeSide(lm, dim) {
+  // em perfil, médias esquerda/direita aproximam a linha média do corpo
+  const ear = mid(px(lm[L.earL], dim), px(lm[L.earR], dim));
+  const sh = mid(px(lm[L.shL], dim), px(lm[L.shR], dim));
+  const hip = mid(px(lm[L.hipL], dim), px(lm[L.hipR], dim));
+  const kn = mid(px(lm[L.knL], dim), px(lm[L.knR], dim));
+  const ak = mid(px(lm[L.akL], dim), px(lm[L.akR], dim));
+
+  // anteriorização da cabeça: ângulo da linha ombro->orelha em relação à vertical
+  const fhp = tiltFromVertical(sh, ear);
+  // inclinação do tronco: ombro->anca em relação à vertical
+  const trunkLean = tiltFromVertical(hip, sh);
+  // alinhamento global (fio de prumo): desvio horizontal ombro vs tornozelo, % da altura
+  const bodyHeight = Math.abs(ak.y - ear.y) || 1;
+  const plumbDev = Math.abs(sh.x - ak.x) / bodyHeight * 100;
+
+  const metrics = [
+    { name: 'Anteriorização da cabeça', value: fhp, unit: '°', sev: severity(fhp, 8, 18),
+      desc: 'Cabeça projetada à frente dos ombros ("text neck"). Sobrecarrega a cervical e os trapézios.' },
+    { name: 'Inclinação do tronco', value: trunkLean, unit: '°', sev: severity(trunkLean, 5, 12),
+      desc: 'Tronco inclinado à frente ou atrás em relação à vertical. Relaciona-se com a curvatura da coluna.' },
+    { name: 'Fio de prumo (ombro × tornozelo)', value: plumbDev, unit: '%', sev: severity(plumbDev, 6, 12),
+      desc: 'O ombro deveria ficar alinhado verticalmente sobre o tornozelo. Grandes desvios indicam má distribuição de carga.' }
+  ];
+  return { metrics, draw: { type: 'side', ear, sh, hip, kn, ak } };
+}
+
+// ---------- desenho overlay ----------
+const SEV_COLOR = { ok: '#4ade80', mild: '#ffb547', bad: '#ff4d6d' };
+function dot(ctx, p, color) {
+  ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(4, ctx.canvas.width*0.008), 0, Math.PI*2);
+  ctx.fillStyle = color; ctx.shadowColor = color; ctx.shadowBlur = 12; ctx.fill(); ctx.shadowBlur = 0;
+}
+function line(ctx, a, b, color, w) {
+  ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+  ctx.strokeStyle = color; ctx.lineWidth = w || Math.max(2, ctx.canvas.width*0.005); ctx.stroke();
+}
+function drawOverlay(view, drawData, metrics) {
+  const { canvas, ctx } = photos[view];
+  const worst = metrics.reduce((m, x) => ({ ok:0, mild:1, bad:2 }[x.sev] > ({ ok:0, mild:1, bad:2 }[m]) ? x.sev : m), 'ok');
+  const accent = '#d946ef';
+  if (drawData.type === 'front') {
+    const { shL, shR, hipL, hipR, earL, earR, nose, shMid } = drawData;
+    line(ctx, shL, shR, SEV_COLOR[metrics[0].sev]);
+    line(ctx, hipL, hipR, SEV_COLOR[metrics[1].sev]);
+    line(ctx, earL, earR, SEV_COLOR[metrics[2].sev]);
+    // fio de prumo central
+    ctx.setLineDash([6, 8]);
+    line(ctx, { x: shMid.x, y: 0 }, { x: shMid.x, y: canvas.height }, 'rgba(217,70,239,0.7)', 2);
+    ctx.setLineDash([]);
+    [shL, shR, hipL, hipR, earL, earR].forEach(p => dot(ctx, p, accent));
+    dot(ctx, nose, SEV_COLOR[metrics[3].sev]);
+  } else {
+    const { ear, sh, hip, kn, ak } = drawData;
+    line(ctx, ear, sh, SEV_COLOR[metrics[0].sev]);
+    line(ctx, sh, hip, SEV_COLOR[metrics[1].sev]);
+    line(ctx, hip, kn, accent);
+    line(ctx, kn, ak, accent);
+    // fio de prumo a partir do tornozelo
+    ctx.setLineDash([6, 8]);
+    line(ctx, { x: ak.x, y: 0 }, { x: ak.x, y: canvas.height }, 'rgba(217,70,239,0.7)', 2);
+    ctx.setLineDash([]);
+    [ear, sh, hip, kn, ak].forEach(p => dot(ctx, p, accent));
+  }
+}
+
+// ---------- execução ----------
+window.runAnalysis = async () => {
+  const status = document.getElementById('statusLine');
+  const btn = document.getElementById('btnAnalyze');
+  btn.disabled = true;
+  safeTrack('AnalysisStarted', { front: !!photos.front, side: !!photos.side });
+  try {
+    await loadModel(status);
+  } catch (err) {
+    status.textContent = '⚠ Não foi possível carregar o modelo de IA. Verifica a tua ligação à internet e tenta de novo.';
+    btn.disabled = false;
+    return;
+  }
+
+  status.innerHTML = '<span class="spinner"></span> A analisar a tua postura…';
+  const allMetrics = [];
+  const annotatedGrid = document.getElementById('annotatedGrid');
+  annotatedGrid.innerHTML = '';
+  let detectedAny = false;
+
+  for (const view of ['front', 'side']) {
+    if (!photos[view]) continue;
+    const dim = { w: photos[view].w, h: photos[view].h };
+    let result;
+    try {
+      result = poseLandmarker.detect(photos[view].canvas);
+    } catch (e) { continue; }
+    if (!result.landmarks || result.landmarks.length === 0) {
+      const note = document.createElement('div');
+      note.className = 'annotated-card';
+      note.innerHTML = `<h4>${view === 'front' ? 'Frente' : 'Perfil'}</h4><p style="color:var(--muted);font-size:0.85rem;text-align:center;">Não consegui detetar uma pessoa nesta foto. Garante que apareces de corpo inteiro, bem iluminado e centrado.</p>`;
+      annotatedGrid.appendChild(note);
+      continue;
+    }
+    detectedAny = true;
+    const lm = result.landmarks[0];
+    const analysis = view === 'front' ? analyzeFront(lm, dim) : analyzeSide(lm, dim);
+    // redesenhar imagem limpa + overlay (caso re-analise)
+    drawOverlay(view, analysis.draw, analysis.metrics);
+    allMetrics.push(...analysis.metrics.map(m => ({ ...m, view })));
+
+    // clonar canvas anotado para a grelha de resultados
+    const card = document.createElement('div');
+    card.className = 'annotated-card';
+    const title = document.createElement('h4');
+    title.textContent = view === 'front' ? 'Vista de Frente' : 'Vista de Perfil';
+    const clone = document.createElement('canvas');
+    clone.width = photos[view].canvas.width; clone.height = photos[view].canvas.height;
+    clone.getContext('2d').drawImage(photos[view].canvas, 0, 0);
+    card.appendChild(title); card.appendChild(clone);
+    annotatedGrid.appendChild(card);
+  }
+
+  if (!detectedAny) {
+    status.textContent = '⚠ Não detetei ninguém nas fotos. Tenta com fotos de corpo inteiro, bem iluminadas.';
+    btn.disabled = false;
+    document.getElementById('resultsSection').classList.remove('show');
+    return;
+  }
+
+  renderMetrics(allMetrics);
+  renderScore(allMetrics);
+  document.getElementById('resultsSection').classList.add('show');
+  status.textContent = '';
+  btn.disabled = false;
+  document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const worstCount = allMetrics.filter(m => m.sev === 'bad').length;
+  safeTrackStandard('Lead', { content_name: 'Avaliacao Postural Completa', content_category: scoreBucket(allMetrics), currency: 'EUR' });
+  safeTrack('AnalysisCompleted', { metrics: allMetrics.length, flagged: worstCount });
+};
+
+function renderMetrics(metrics) {
+  const grid = document.getElementById('metricsGrid');
+  grid.innerHTML = '';
+  metrics.forEach(m => {
+    const el = document.createElement('div');
+    el.className = 'metric-card ' + m.sev;
+    const val = m.unit === '°' ? m.value.toFixed(1) : Math.round(m.value);
+    el.innerHTML = `
+      <div class="metric-head">
+        <span class="metric-name">${m.name}</span>
+        <span class="metric-val">${val}${m.unit}</span>
+      </div>
+      <div class="metric-tag">${tagText[m.sev]}</div>
+      <div class="metric-desc">${m.desc}</div>`;
+    grid.appendChild(el);
+  });
+}
+
+function computeScore(metrics) {
+  // cada métrica: ok=0, mild=-8, bad=-18 (limitado a 0..100)
+  let score = 100;
+  metrics.forEach(m => { score -= m.sev === 'bad' ? 18 : m.sev === 'mild' ? 8 : 0; });
+  return Math.max(0, Math.round(score));
+}
+function scoreBucket(metrics) {
+  const s = computeScore(metrics);
+  return s >= 80 ? 'good' : s >= 55 ? 'mid' : 'low';
+}
+function renderScore(metrics) {
+  const s = computeScore(metrics);
+  const numEl = document.getElementById('scoreNum');
+  const badge = document.getElementById('scoreBadge');
+  numEl.textContent = s;
+  if (s >= 80) {
+    numEl.className = 'score-num score-high';
+    badge.className = 'score-badge badge-good';
+    badge.textContent = '✓ Boa postura geral';
+  } else if (s >= 55) {
+    numEl.className = 'score-num score-mid';
+    badge.className = 'score-badge badge-mid';
+    badge.textContent = '⚠ Desalinhamentos a corrigir';
+  } else {
+    numEl.className = 'score-num score-low';
+    badge.className = 'score-badge badge-bad';
+    badge.textContent = '✕ Vários desalinhamentos importantes';
+  }
+}
+</script>
+</body>
+</html>

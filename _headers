@@ -1,0 +1,14 @@
+# Cloudflare Pages lê este ficheiro no mesmo formato do Netlify.
+# Regras aplicadas por path. O "/*" cobre todo o site.
+
+/*
+  # Segurança
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# HTML sempre fresco (a landing muda e corre tráfego pago)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

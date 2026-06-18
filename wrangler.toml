@@ -1,0 +1,5 @@
+# Configuração do Cloudflare Pages para este site estático.
+# Site sem build: os ficheiros HTML já estão prontos na raiz do repo.
+name = "teste-hernia-disco"
+compatibility_date = "2026-06-18"
+pages_build_output_dir = "."
